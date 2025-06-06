@@ -25,10 +25,15 @@ export class OfferResolver {
   getOffers(
     @Args('type', { nullable: true, type: () => String }) type?: OfferType,
   ) {
-    if (type) {
-      return this.offerService.getOffersByType(type);
-    }
-    return this.offerService.getOffers();
+    return this.offerService.getOffers(type);
+  }
+
+  @Query(() => [Offer])
+  getOffersOfUser(
+    @Args('userId', { type: () => Int }) userId: number,
+    @Args('type', { nullable: true, type: () => String }) type?: OfferType,
+  ) {
+    return this.offerService.getOffersOfUser(userId, type);
   }
 
   @Query(() => Offer)

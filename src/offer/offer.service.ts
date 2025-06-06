@@ -21,12 +21,37 @@ export class OfferService {
     return await this.offerRepo.save(createOffer);
   }
 
-  getOffers() {
-    return this.offerRepo.find();
+  async getOffers(type?: OfferType) {
+    if (type !== null) {
+      return await this.offerRepo.find({
+        where: { type: type },
+        relations: {
+          createdBy: true
+        }
+      });
+    }
+    return await this.offerRepo.find({
+      relations: {
+        createdBy: true
+      }
+    });
   }
 
-  async getOffersByType(type: OfferType) {
-    return await this.offerRepo.find({ where: { type: type } });
+  async getOffersOfUser(userId: number, type?: OfferType) {
+    await this.userService.findOne(userId);
+    if (type !== null) {
+      return await this.offerRepo.find({
+        where: {
+          type: type,
+          createdBy: { id: userId }
+        }
+      });
+    }
+    return await this.offerRepo.find({
+      where: {
+        createdBy: { id: userId }
+      }
+    });
   }
 
   async findOne(id: number) {
