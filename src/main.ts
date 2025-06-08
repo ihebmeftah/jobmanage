@@ -9,7 +9,6 @@ async function bootstrap() {
       whitelist: true,
       transform: true,
     }),
-
   );
   await app.listen(parseInt(process.env.PORT!));
 }
