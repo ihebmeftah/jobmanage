@@ -8,7 +8,8 @@ import { User } from './entities/user.entity';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User) private readonly userRepos: Repository<User>,
+    @InjectRepository(User) 
+    private readonly userRepos: Repository<User>,
   ) { }
   create(createUserInput: CreateUserInput) {
     const createUser = this.userRepos.create(createUserInput);

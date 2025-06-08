@@ -55,7 +55,14 @@ export class OfferService {
   }
 
   async findOne(id: number) {
-    const offer = await this.offerRepo.findOne({ where: { id } });
+    const offer = await this.offerRepo.findOne(
+      {
+        where: { id },
+        relations: {
+          createdBy: true
+        }
+      }
+    );
     if (!offer) {
       throw new NotFoundException(`Offer with ID ${id} not found`);
     }

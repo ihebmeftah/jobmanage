@@ -2,6 +2,6 @@ import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateCandidatureInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => Int)
+  offerId: number;
 }
